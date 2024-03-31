@@ -1,5 +1,11 @@
 # Screenshots
-![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/877aaab5-c718-43d9-9b68-5e87055be585)
+## Dahboard:
+![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/98b22a57-b372-48a9-9a87-ddf6056cdfc1)
+
+## Mobile Preview:
+![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/df03eca4-b39b-4afe-8a2b-a21148538557)
+
+
 
 # React + Vite
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
