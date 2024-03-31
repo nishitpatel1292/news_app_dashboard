@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './ManageNews.scss'
-import { deleteNewsArticle, fetchNewsData } from '../../utils/fetchNewsData';
+import { deleteNewsArticle, fetchNewsData, viewNewsArticle } from '../../utils/fetchNewsData';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import FormNews from '../CreateNews/FormNews';
 
-function MyVerticallyCenteredModal(props) {
+function EditModal(props) {
     return (
         <Modal
             {...props}
@@ -14,10 +15,12 @@ function MyVerticallyCenteredModal(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
+
                     Modal heading
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                <FormNews data={props.data} hide={props.onHide}/>
                 <h4>Centered Modal</h4>
                 <p>
                     Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
@@ -33,6 +36,7 @@ function MyVerticallyCenteredModal(props) {
 }
 
 const ManageNews = () => {
+    const [selectedArticle, setSelectedArticle] = useState();
     const [data, setData] = useState('')
     const [modalShow, setModalShow] = useState(false);
     useEffect(() => {
@@ -48,9 +52,12 @@ const ManageNews = () => {
             }
         }
         fetchData()
-    }, [data, deleteNewsArticle]);
+    }, [data]);
 
-
+    const handleEditClick = (article) => {
+        setSelectedArticle(article);
+        setModalShow(true);
+    };
 
     return (
         <div className='manage-news'>
@@ -73,7 +80,7 @@ const ManageNews = () => {
                             <td>{feed.createdAt}</td>
                             <td>{feed.isPublished ? 'Published' : 'Draft'}</td>
                             <td>
-                                <button onClick={() => setModalShow(true)}>Edit</button>
+                                <button onClick={() => handleEditClick(feed)}>Edit</button>
                                 <button onClick={() => { deleteNewsArticle(feed.id) }}>Delete</button>
                                 <button onClick={() => { }}
                                 >View</button>
@@ -84,10 +91,14 @@ const ManageNews = () => {
 
                 </tbody>
             </table>
-            <MyVerticallyCenteredModal
+            {
+            selectedArticle &&
+            <EditModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
+                data={selectedArticle}
             />
+            }
         </div>
     );
 };
