@@ -1,5 +1,5 @@
 # Screenshots
-## Dahboard:
+## Dashboard:
 ![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/0c664db7-d8b9-4280-b312-715e6a60dab2)
 
 
@@ -9,7 +9,11 @@
 
 
 # React + Vite
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+steps to run this project:
+- install node modules: npm install
+- run locally in dev mode: npm run dev
+- build: num run build
+
 
 Currently, two official plugins are available:
 
