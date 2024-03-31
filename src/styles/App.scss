@@ -1,0 +1,18 @@
+@import './variables.scss';
+
+.app {
+    display: flex;
+
+    .app-container {
+        flex: 6;
+
+        .main-content {
+            background-color: #f6f6f6;
+            min-height: calc(100vh - 3rem);
+            overflow-y: scroll;
+            padding-left: 16%;
+
+            
+        }
+    }
+}

@@ -1,0 +1,65 @@
+@import '@/styles/variables';
+
+.sidebar {
+    position: fixed;
+    top:0;
+    min-width: 16%;
+    max-width: 26.66%;
+    z-index: 999;
+    width: 16%;
+    min-height: 100vh;
+    border-right: 1px solid #e6e6e6;
+    background-color: white;
+    box-shadow: $shadow;
+    
+    .top {
+        height: 60px;
+        border-bottom: 1px solid #e6e6e6;        display: flex;
+        justify-content: center;
+        align-items: center;
+        a{
+            width: 80%;
+        }
+        .logo {
+            
+            object-fit: cover;
+            width: 100%;   
+            
+        }
+        .arrow-btn svg{
+            background-color: $primary-color;
+            color: white;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: 300;
+            color: $secondary-color;
+            cursor: pointer;
+        }
+    }
+
+    .middle {
+        flex: 1;
+            li {
+                list-style-type: none;
+                padding: 15px 30px;
+                border-left: 4px solid transparent;
+                &.active{
+                    border-left: 4px solid $primary-color;
+                    a{color: $primary-color !important};
+                }
+                a{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    color: black;
+                    svg{
+                        font-size: 16px;
+                    }
+                    
+                }
+            }
+        
+    }
+
+   
+}

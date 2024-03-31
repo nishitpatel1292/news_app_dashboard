@@ -2,11 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { Router, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import {  RouterProvider, createBrowserRouter } from 'react-router-dom'
 import ErrorPage from '@/error.jsx'
-import User from '@/components/Users/User.jsx'
 import Dashboard from '@/components/Dashboard/Dashboard.jsx'
 import CreateNews from '@/components/CreateNews/CreateNews.jsx'
+import ManageNews from '@/components/ManageNews/ManageNews.jsx'
+import Performance from '@/components/Performance/Performance.jsx'
+import View from './components/View/View.jsx'
 Dashboard
 
 const router = createBrowserRouter([
@@ -24,8 +26,16 @@ const router = createBrowserRouter([
         element: <CreateNews/>
       },
       {
-        path: 'users/:userId',
-        element: <User/>,
+        path: '/manage-news',
+        element: <ManageNews/>
+      },
+      {
+        path: '/performance',
+        element: <Performance/>
+      },
+      {
+        path: 'view/:articleId',
+        element: <View/>
       }
     ]
   },
