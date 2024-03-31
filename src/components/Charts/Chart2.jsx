@@ -32,22 +32,7 @@ const Chart2 = () => {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                 </Pie>
-                <Pie
-                    data={data}
-                    cx={600}
-                    cy={150}
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#82ca9d"
-                    dataKey="value"
-                    labelLine={false}
-                    label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
-                
-                >
-                    {data.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Pie>
+            
                 <Legend verticalAlign="top" height={26} />
             </PieChart>
         </ResponsiveContainer>

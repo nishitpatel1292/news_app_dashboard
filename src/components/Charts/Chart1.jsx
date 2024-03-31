@@ -17,26 +17,32 @@ const data = [
     {
         name: 'Jan',
         newUsers: 200,
+        newPosts: 100,
     },
     {
         name: 'Feb',
         newUsers: 230,
+        newPosts: 150,
     },
     {
         name: 'March',
         newUsers: 250,
+        newPosts: 170,
     },
     {
         name: 'April',
         newUsers: 300,
+        newPosts: 180,
     },
     {
         name: 'May',
         newUsers: 275,
+        newPosts: 130,
     },
     {
         name: 'June',
         newUsers: 320,
+        newPosts: 150,
     },
 ];
 
@@ -61,9 +67,9 @@ const Chart1 = () => {
                 <Tooltip />
                 <Legend />
                 <Area type="monotone" dataKey="newUsers" fill="#8884d8" stroke="#8884d8" />
-                <Bar dataKey="newUsers" barSize={20} fill="#413ea0" />
-                <Line type="monotone" dataKey="newUsers" stroke="#ff7300" />
-                <Scatter dataKey="newUsers" fill="red" />
+                <Bar dataKey="newPosts" barSize={20} fill="#413ea0" />
+                {/* <Line type="monotone" dataKey="newUsers" stroke="#ff7300" />
+                <Scatter dataKey="newUsers" fill="red" /> */}
             </ComposedChart>
         </ResponsiveContainer>
     );

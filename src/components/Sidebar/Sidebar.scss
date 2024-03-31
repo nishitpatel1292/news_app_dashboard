@@ -39,6 +39,10 @@
 
     .middle {
         flex: 1;
+        ul{
+            margin: 0;
+            padding: 0;
+        }
             li {
                 list-style-type: none;
                 padding: 15px 30px;
