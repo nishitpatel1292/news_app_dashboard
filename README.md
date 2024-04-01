@@ -12,6 +12,9 @@
 ![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/d9febc07-51e5-47ff-a74b-f5b2d4f0cbd7)
 
 
+# API
+This API allows to store mock data, but media(images, videos) cannot be stored here that's why those are excluded in CRUD operations
+[https://mockapi.io/projects/660419f62393662c31d09df0](https://660419f62393662c31d09def.mockapi.io/api/)
 
 # React + Vite
 steps to run this project:
