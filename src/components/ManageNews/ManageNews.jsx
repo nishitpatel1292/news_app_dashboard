@@ -8,6 +8,7 @@ import SpinnerWrapper from '../widgets/SpinnerWrapper';
 import { ToastContainer, toast } from 'react-toastify';
 
 function EditModal(props) {
+    console.log(props)
     return (
         <Modal
             {...props}
@@ -29,14 +30,65 @@ function EditModal(props) {
                 <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
+        
+    );
+}
+function ViewModal(props) {
+    return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    View News
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                    <p><span className='text-primary'>Category:
+                        </span> {props.data.category}</p>
+                    <p><span className='text-primary'>
+                        Title: </span> {props.data.title}</p>
+                    <p><span className='text-primary'>Content: </span> {props.data.content}</p>
+
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={props.onHide}>Close</Button>
+            </Modal.Footer>
+        </Modal>
     );
 }
 
+
 const ManageNews = () => {
-    const [selectedArticle, setSelectedArticle] = useState();
+    const [selectedArticle, setSelectedArticle] = useState({});
     const [data, setData] = useState('')
     const [modalShow, setModalShow] = useState(false);
-
+    
+    const renderModal = () => {
+        switch (selectedArticle.type) {
+            case 'edit':
+                return (
+                    <EditModal
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                        data={selectedArticle.data}
+                    />
+                );
+            case 'view':
+                return (
+                    <ViewModal
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                        data={selectedArticle.data}
+                    />
+                );
+            default:
+                return null;
+        }
+    }
     const fetchData = async () => {
         try {
 
@@ -52,7 +104,11 @@ const ManageNews = () => {
     }, []);
 
     const handleEditClick = (article) => {
-        setSelectedArticle(article);
+        setSelectedArticle({data: article,type:'edit'});
+        setModalShow(true);
+    };
+    const handleViewClick = (article) => {
+        setSelectedArticle({data: article,type:'view'});
         setModalShow(true);
     };
     const handleDeleteClick = (id) => {
@@ -87,7 +143,7 @@ const ManageNews = () => {
                             <td>
                                 <button onClick={() => handleEditClick(feed)}>Edit</button>
                                 <button onClick={() => {handleDeleteClick(feed.id)}}>Delete</button>
-                                <button onClick={() => { }}
+                                <button onClick={() => {handleViewClick(feed)}}
                                 >View</button>
                             </td>
                         </tr>
@@ -98,14 +154,9 @@ const ManageNews = () => {
             {
                 !data && <SpinnerWrapper />
             }
-            {
-                selectedArticle &&
-                <EditModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    data={selectedArticle}
-                />
-            }
+            
+            {selectedArticle && renderModal()}
+            
             <ToastContainer
                 position="top-right"
                 autoClose={5000}

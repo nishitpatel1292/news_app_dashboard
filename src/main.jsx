@@ -9,8 +9,6 @@ import CreateNews from '@/components/CreateNews/CreateNews.jsx'
 import ManageNews from '@/components/ManageNews/ManageNews.jsx'
 import Performance from '@/components/Performance/Performance.jsx'
 import 'react-toastify/dist/ReactToastify.css';
-import View from '@/components/View/View.jsx'
-import { ToastContainer, toast } from 'react-toastify'
 
 
 const router = createBrowserRouter([
@@ -34,10 +32,6 @@ const router = createBrowserRouter([
       {
         path: '/performance',
         element: <Performance/>
-      },
-      {
-        path: 'view/:articleId',
-        element: <View/>
       }
     ]
   },
