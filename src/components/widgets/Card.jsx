@@ -1,6 +1,8 @@
 import React from 'react'
-import { KeyboardArrowUp, PersonOutlineRounded } from '@mui/icons-material'
+import {  Diversity3Outlined, KeyboardArrowUp, PersonOutlineRounded, ThumbUp, Visibility } from '@mui/icons-material'
+
 import Chart from './Chart'
+
 const Card = ({ type }) => {
     let data;
 
@@ -11,6 +13,7 @@ const Card = ({ type }) => {
                 value: 21500,
                 link: 'See all users',
                 perDiff: 2,
+                icon: <PersonOutlineRounded/>,
                 chartData: [
                     {
                         uv: 1000
@@ -40,6 +43,7 @@ const Card = ({ type }) => {
                 value: 150245,
                 link: 'See all views',
                 perDiff: -5,
+                icon: <Visibility/>,
                 chartData: [
                     {
                         uv: 45000,
@@ -70,6 +74,7 @@ const Card = ({ type }) => {
                 value: 450456,
                 link: 'See all likes',
                 perDiff: +2,
+                icon: <ThumbUp/>,
                 chartData: [
                     {
                         uv: 100456,
@@ -95,6 +100,7 @@ const Card = ({ type }) => {
                 value: 148965,
                 link: 'See all followers',
                 perDiff: +36,
+                icon: <Diversity3Outlined/>,
                 chartData: [
                     {
                         uv: 8965,
@@ -138,7 +144,7 @@ const Card = ({ type }) => {
                         <KeyboardArrowUp /> {data.perDiff}<div style={{ fontSize: '14px' }}>%</div>
                     </div>
                     <span className="icon">
-                        <PersonOutlineRounded />
+                        {data.icon}
                     </span>
                 </div>
             </div>

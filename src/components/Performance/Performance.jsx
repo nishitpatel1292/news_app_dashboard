@@ -11,8 +11,8 @@ const Performance = () => {
     ];
 
     return (
-        <div>
-            <h2>Performance Metrics</h2>
+        <div style={{padding:'20px'}}>
+            <h2 className='mb-5'>Performance Metrics</h2>
             <LineChart width={800} height={400} data={data}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="date" />

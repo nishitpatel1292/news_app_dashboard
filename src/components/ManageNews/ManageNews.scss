@@ -22,9 +22,22 @@
         background-color: #f0f0f0;
         font-weight: bold;
       }
-  
+      .btns{
+        display: flex;
+        flex-direction: row;
+      }
       td {
         text-align: left;
+        button{
+          font-size: 12px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 2px;
+          svg{
+            font-size: 16px;
+          }
+        }
       }
   
       tbody tr:nth-child(even) {

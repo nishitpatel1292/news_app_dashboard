@@ -6,6 +6,8 @@ import Modal from 'react-bootstrap/Modal';
 import FormNews from '../CreateNews/FormNews';
 import SpinnerWrapper from '../widgets/SpinnerWrapper';
 import { ToastContainer, toast } from 'react-toastify';
+import { Badge } from 'react-bootstrap';
+import { DeleteOutline, Edit, RemoveRedEyeOutlined } from '@mui/icons-material';
 
 function EditModal(props) {
     console.log(props)
@@ -30,7 +32,7 @@ function EditModal(props) {
                 <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
-        
+
     );
 }
 function ViewModal(props) {
@@ -47,11 +49,11 @@ function ViewModal(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                    <p><span className='text-primary'>Category:
-                        </span> {props.data.category}</p>
-                    <p><span className='text-primary'>
-                        Title: </span> {props.data.title}</p>
-                    <p><span className='text-primary'>Content: </span> {props.data.content}</p>
+                <p><span className='text-primary'>Category:
+                </span> {props.data.category}</p>
+                <p><span className='text-primary'>
+                    Title: </span> {props.data.title}</p>
+                <p><span className='text-primary'>Content: </span> {props.data.content}</p>
 
             </Modal.Body>
             <Modal.Footer>
@@ -66,7 +68,7 @@ const ManageNews = () => {
     const [selectedArticle, setSelectedArticle] = useState({});
     const [data, setData] = useState('')
     const [modalShow, setModalShow] = useState(false);
-    
+
     const renderModal = () => {
         switch (selectedArticle.type) {
             case 'edit':
@@ -99,16 +101,16 @@ const ManageNews = () => {
             console.log(err)
         }
     }
-    useEffect(() => {    
+    useEffect(() => {
         fetchData()
     }, []);
 
     const handleEditClick = (article) => {
-        setSelectedArticle({data: article,type:'edit'});
+        setSelectedArticle({ data: article, type: 'edit' });
         setModalShow(true);
     };
     const handleViewClick = (article) => {
-        setSelectedArticle({data: article,type:'view'});
+        setSelectedArticle({ data: article, type: 'view' });
         setModalShow(true);
     };
     const handleDeleteClick = (id) => {
@@ -139,12 +141,21 @@ const ManageNews = () => {
                             <td>{feed.title}</td>
                             <td>{feed.category}</td>
                             <td>{feed.createdAt}</td>
-                            <td>{feed.isPublished ? 'Published' : 'Draft'}</td>
-                            <td>
-                                <button onClick={() => handleEditClick(feed)}>Edit</button>
-                                <button onClick={() => {handleDeleteClick(feed.id)}}>Delete</button>
-                                <button onClick={() => {handleViewClick(feed)}}
-                                >View</button>
+                            <td><Badge pill as='h3' bg={feed.isPublished ? 'success' : 'secondary'}>
+                                {feed.isPublished ? 'Published' : 'Draft'}
+                            </Badge>
+                            </td>
+                            <td className='btns'>
+                                <button onClick={() => handleEditClick(feed)}>
+                                    <Edit/>
+                                    Edit</button>
+                                <button onClick={() => { handleDeleteClick(feed.id) }}>
+                                    <DeleteOutline/>
+                                    Delete</button>
+                                <button onClick={() => { handleViewClick(feed) }}
+                                >
+                                    <RemoveRedEyeOutlined/>
+                                    View</button>
                             </td>
                         </tr>
                     ))}
@@ -154,9 +165,9 @@ const ManageNews = () => {
             {
                 !data && <SpinnerWrapper />
             }
-            
+
             {selectedArticle && renderModal()}
-            
+
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
