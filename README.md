@@ -1,12 +1,11 @@
 # Screenshots
 ## Dashboard:
-![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/0c664db7-d8b9-4280-b312-715e6a60dab2)
+![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/f60572a2-2606-440f-a08a-ef2197bec70d)
 
-## Create News:
-![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/b242a1f8-9da2-4bc4-a537-ceafdcee4723)
 
-## Mobile Preview:
-![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/df03eca4-b39b-4afe-8a2b-a21148538557)
+## Create News (with Mobile Preview):
+![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/2420a175-627e-4005-a48e-1708ff93d049)
+
 
 ## Edit:
 ![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/d9febc07-51e5-47ff-a74b-f5b2d4f0cbd7)
