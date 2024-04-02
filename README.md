@@ -6,6 +6,9 @@
 ## Create News (with Mobile Preview):
 ![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/2420a175-627e-4005-a48e-1708ff93d049)
 
+# Manage News:
+![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/daa16cb1-d420-4a30-8543-eb8a4868457e)
+
 
 ## Edit:
 ![image](https://github.com/nishitpatel1292/news_app_dashboard/assets/73834549/d9febc07-51e5-47ff-a74b-f5b2d4f0cbd7)
