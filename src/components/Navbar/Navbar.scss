@@ -3,6 +3,7 @@
 .navbar {
     height: 60px;
     display: flex;
+    padding-left: 16%;
     align-items: center;
     background-color: $secondary-color;
     font-size: 14px;
@@ -43,7 +44,9 @@
         .navbar_right_items {
             display: flex;
             flex-direction: row;
-
+            div{
+                cursor: pointer;
+            }
             .item {
                 display: flex;
                 align-items: center;

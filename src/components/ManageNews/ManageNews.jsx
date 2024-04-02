@@ -146,13 +146,13 @@ const ManageNews = () => {
                             </Badge>
                             </td>
                             <td className='btns'>
-                                <button onClick={() => handleEditClick(feed)}>
+                                <button className='btn btn-primary' onClick={() => handleEditClick(feed)}>
                                     <Edit/>
                                     Edit</button>
-                                <button onClick={() => { handleDeleteClick(feed.id) }}>
+                                <button className='btn btn-danger' onClick={() => { handleDeleteClick(feed.id) }}>
                                     <DeleteOutline/>
                                     Delete</button>
-                                <button onClick={() => { handleViewClick(feed) }}
+                                <button className='btn btn-primary' onClick={() => { handleViewClick(feed) }}
                                 >
                                     <RemoveRedEyeOutlined/>
                                     View</button>

@@ -13,13 +13,13 @@ const Chart2 = () => {
     const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7f50', '#0088FE'];
 
     return (
-        <ResponsiveContainer>
+        <ResponsiveContainer width='100%' height='100%'>
 
-            <PieChart width={400} height={300}>
+            <PieChart width='80%' height='90%'>
                 <Pie
                     data={data}
-                    cx={200}
-                    cy={150}
+                    cx='50%'
+                    cy='60%'
                     innerRadius={60}
                     outerRadius={80}
                     fill="#8884d8"

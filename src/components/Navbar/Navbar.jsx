@@ -5,6 +5,15 @@ import FullscreenOutlinedIcon from '@mui/icons-material/FullscreenOutlined';
 import { SearchOutlined } from '@mui/icons-material';
 const Navbar = () => {
 
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
   return (
     <div className='navbar'>
       <div className="wrapper">
@@ -17,16 +26,25 @@ const Navbar = () => {
             </div>
           </label>
 
-          <input type="search" name="search" className='input-search' id="search"
+          <input
+            type="search"
+            name="search"
+            className='input-search' id="search"
             placeholder='Search...'
           />
         </div>
         <div className="navbar_right_items">
           <div className="theme item">
             <DarkModeOutlinedIcon className='icon' />
-
           </div>
-          <div className="full-screen item"><FullscreenOutlinedIcon className='icon' /></div>
+
+          <div
+            onClick={toggleFullScreen} className="full-screen item"
+            >
+
+            <FullscreenOutlinedIcon className='icon' />
+          </div>
+
           <div className="avatar-wrapper item">
             <img src="/Images/logo.webp" alt="profile" className="avatar" />
           </div>
