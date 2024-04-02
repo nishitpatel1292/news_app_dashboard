@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './CreateNews.scss';
 import { createNewsArticle } from '../../utils/fetchNewsData';
+import { DeleteOutline } from '@mui/icons-material';
 
 const CreateNews = () => {
     const [title, setTitle] = useState('');
@@ -8,10 +9,13 @@ const CreateNews = () => {
     const [category, setCategory] = useState('');
     const [image, setImage] = useState(null);
     const [video, setVideo] = useState(null);
-    const [mobilePreview, setMobilePreview] = useState(false);
+
+    const imageInputRef = useRef();
+    const videoInputRef = useRef();
+    // const [mobilePreview, setMobilePreview] = useState(false);
 
     const boxRef = useRef(null);
-
+    // This is created for the purpose of scrolling like a mobile device with grabbing screen(touching in mobile)
     const handleMouseDown = (e) => {
         e.preventDefault();
         const startX = e.pageX - boxRef.current.offsetLeft;
@@ -51,27 +55,39 @@ const CreateNews = () => {
     };
 
     const handleImageUpload = (e) => {
+        if (video) {
+            alert('You have already uploaded a video. Please remove it before uploading an image.');
+            imageInputRef.current.value = null;
+            return;
+
+        }
         const file = e.target.files[0];
         setImage(file);
     };
 
     const handleVideoUpload = (e) => {
+        if (image) {
+            alert('You have already uploaded an image. Please remove it before uploading a video.');
+            videoInputRef.current.value = null;
+            return;
+        }
         const file = e.target.files[0];
         setVideo(file);
     };
 
-    const handleMobilePreviewToggle = () => {
-        setMobilePreview(!mobilePreview);
-    };
+    // const handleMobilePreviewToggle = () => {
+    //     setMobilePreview(!mobilePreview);
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // this is going straight to the api 
         const article = {
-            title : title,
+            title: title,
             content: content,
             category: category,
             author: 'Sachin Shah',
-            likes:0,
+            likes: 0,
             views: 0,
             isPublished: true
         }
@@ -81,65 +97,72 @@ const CreateNews = () => {
 
     return (
         <div className='create-news-wrapper'>
-            <h2>Create News</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor='title'>Title:</label>
-                <input type='text' id='title' value={title} onChange={handleTitleChange} />
+            <div className="form-wrapper">
 
-                <label htmlFor='content'>Content:</label>
-                <textarea id='content' value={content} onChange={handleContentChange} wrap='hard' />
+                <h2>Create News</h2>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor='title'>Title:</label>
+                    <input type='text' id='title' value={title} onChange={handleTitleChange} />
 
-                <label htmlFor='category'>Category:</label>
-                <input type='text' id='category' value={category} onChange={handleCategoryChange} />
+                    <label htmlFor='content'>Content:</label>
+                    <textarea id='content' value={content} onChange={handleContentChange} wrap='hard' />
 
-                <label htmlFor='image'>Image:</label>
-                <input type='file' id='image' accept='image/*' onChange={handleImageUpload} />
+                    <label htmlFor='category'>Category:</label>
+                    <input type='text' id='category' value={category} onChange={handleCategoryChange} />
 
-                <label htmlFor='video'>Video:</label>
-                <input type='file' id='video' accept='video/*' onChange={handleVideoUpload} />
+{/* we will allow only one out of image and video */}
 
-                <button className='default-btn' type='submit'>Publish</button>
-            </form>
+                    <label htmlFor='image'>Image:</label>
+                    <input type='file' id='image' accept='image/*' onChange={handleImageUpload} ref={imageInputRef} />
+                    {image && <button className='btn btn-danger' onClick={() => { setImage(null); imageInputRef.current.value = null; }}><DeleteOutline /></button>}
 
-            <div>
+                    <label htmlFor='video'>Video:</label>
+                    <input type='file' id='video' accept='video/*' onChange={handleVideoUpload} ref={videoInputRef} />
+                    {video && <button className='btn btn-danger' onClick={() => { setVideo(null); videoInputRef.current.value = null; }}><DeleteOutline /></button>}
+
+                    <button className='default-btn' type='submit'>Publish</button>
+                </form>
+            </div>
+
+            <div className='mobile-preview-container'>
                 <h2>Mobile Preview</h2>
-                <button className='default-btn' onClick={handleMobilePreviewToggle}>
+                {/* <button className='default-btn' onClick={handleMobilePreviewToggle}>
                     {mobilePreview ? 'Hide Preview' : 'Show Preview'}
-                </button>
+                </button> */}
                 <div className='mobile-preview-wrapper'>
-                    {mobilePreview && (
-                        <div
-                            className='mobile-preview'
-                            ref={boxRef}
-                            onMouseDown={handleMouseDown}
-                        >
-                            <div className='mobile-preview-screen'>
-                                <div className="media-wrapper">
-                                    {image && <img src={URL.createObjectURL(image)} alt='Preview' />}
-                                    {video && (
-                                        <video controls>
-                                            <source src={URL.createObjectURL(video)} type='video/mp4' />
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    )}
+                    {/* {mobilePreview && ( */}
+                    <div
+                        className='mobile-preview'
+                        ref={boxRef}
+                        onMouseDown={handleMouseDown}
+                    >
+                        <div className='mobile-preview-screen'>
+                            <div className="media-wrapper">
+                                {image && <img src={URL.createObjectURL(image)} alt='Preview' />}
+                                {video && (
+                                    <video controls>
+                                        <source src={URL.createObjectURL(video)} type='video/mp4' />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                )}
 
-                                    {
+                                {
                                     category &&
-                                        <span className="category-tag">{category}</span>
-                                    }
-                                    <div className="logo">News2Day</div>
-                                </div>
+                                    <span className="category-tag">{category}</span>
+                                }
+                                <div className="logo">News2Day</div>
+                            </div>
 
-                                <div className='content-text'>
-                                    <h2 className='title'>{title}</h2>
-                                    <p className='para'>{content}</p>
-                                </div>
-                                <div className="bottom-mobile-nav">
-                                    Mobile navbar
-                                </div>
+                            <div className='content-text'>
+                                <h2 className='title'>{title}</h2>
+                                <p className='para'>{content}</p>
+                            </div>
+                            <div className="bottom-mobile-nav">
+                                Mobile navbar
                             </div>
                         </div>
-                    )}
+                    </div>
+                    {/* )} */}
                 </div>
             </div>
         </div>

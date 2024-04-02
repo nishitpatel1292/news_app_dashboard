@@ -2,6 +2,15 @@
 
 .create-news-wrapper {
   padding: 20px;
+  display: flex;
+  gap: 2rem;
+  .form-wrapper{
+    flex: 1;
+
+  }
+  .mobile-preview-container{
+    flex: 1;
+  }
 }
 
 form {
@@ -40,6 +49,7 @@ form {
 .mobile-preview-wrapper {
   display: flex;
   justify-content: center;
+  margin-top: 1rem;
 }
 
 .mobile-preview {
