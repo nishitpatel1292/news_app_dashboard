@@ -3,7 +3,7 @@ import { KeyboardArrowUp, PersonOutlineRounded } from '@mui/icons-material'
 import Chart from './Chart'
 const Card = ({ type }) => {
     let data;
-    console.log(type)
+
     switch (type) {
         case "user":
             data = {
@@ -122,7 +122,7 @@ const Card = ({ type }) => {
     }
     
     
-    console.log(data)
+
     return (
         <div className="widget">
             <Chart data={data.chartData} color={`${data.perDiff > 0 ? '#97dbb9' : '#e5a2b4'}`} />

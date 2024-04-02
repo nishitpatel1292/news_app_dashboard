@@ -12,7 +12,6 @@ const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [active, setActive] = useState('/')
 
-  console.log(location)
   return (
     <div className='sidebar'>
       <div className='top' >

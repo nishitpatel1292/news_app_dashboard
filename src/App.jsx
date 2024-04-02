@@ -12,6 +12,7 @@ function App() {
       <Sidebar />
       <div className='app-container'>
         <Navbar />
+        {/* All the pages will be rendered in here: main-content */}
         <div className='main-content'>
           <Outlet />
         </div>

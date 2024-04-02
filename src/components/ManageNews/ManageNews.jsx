@@ -4,6 +4,8 @@ import { deleteNewsArticle, fetchNewsData, viewNewsArticle } from '../../utils/f
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import FormNews from '../CreateNews/FormNews';
+import SpinnerWrapper from '../widgets/SpinnerWrapper';
+import { ToastContainer, toast } from 'react-toastify';
 
 function EditModal(props) {
     return (
@@ -16,12 +18,12 @@ function EditModal(props) {
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
 
-                   Edit News
+                    Edit News
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <FormNews data={props.data} hide={props.onHide}/>
-                
+                <FormNews data={props.data} hide={props.onHide} />
+
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
@@ -34,25 +36,33 @@ const ManageNews = () => {
     const [selectedArticle, setSelectedArticle] = useState();
     const [data, setData] = useState('')
     const [modalShow, setModalShow] = useState(false);
-    useEffect(() => {
 
-        async function fetchData() {
-            try {
+    const fetchData = async () => {
+        try {
 
-                const newsFeeds = await fetchNewsData();
-                setData(newsFeeds)
-                console.log(newsFeeds)
-            } catch (err) {
-                console.log(err)
-            }
+            const newsFeeds = await fetchNewsData();
+            setData(newsFeeds)
+
+        } catch (err) {
+            console.log(err)
         }
+    }
+    useEffect(() => {    
         fetchData()
-    }, [data]);
+    }, []);
 
     const handleEditClick = (article) => {
         setSelectedArticle(article);
         setModalShow(true);
     };
+    const handleDeleteClick = (id) => {
+        deleteNewsArticle(id).then(result => {
+            toast.success('Article deleted successfully')
+            fetchData(); //fetch the data again after delete operation
+        }).catch(err => {
+            toast.error('An error occured')
+        });
+    }
 
     return (
         <div className='manage-news'>
@@ -76,24 +86,38 @@ const ManageNews = () => {
                             <td>{feed.isPublished ? 'Published' : 'Draft'}</td>
                             <td>
                                 <button onClick={() => handleEditClick(feed)}>Edit</button>
-                                <button onClick={() => { deleteNewsArticle(feed.id) }}>Delete</button>
+                                <button onClick={() => {handleDeleteClick(feed.id)}}>Delete</button>
                                 <button onClick={() => { }}
                                 >View</button>
                             </td>
                         </tr>
                     ))}
-
-
                 </tbody>
             </table>
+
             {
-            selectedArticle &&
-            <EditModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                data={selectedArticle}
-            />
+                !data && <SpinnerWrapper />
             }
+            {
+                selectedArticle &&
+                <EditModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    data={selectedArticle}
+                />
+            }
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 };

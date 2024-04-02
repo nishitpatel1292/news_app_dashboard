@@ -8,8 +8,10 @@ import Dashboard from '@/components/Dashboard/Dashboard.jsx'
 import CreateNews from '@/components/CreateNews/CreateNews.jsx'
 import ManageNews from '@/components/ManageNews/ManageNews.jsx'
 import Performance from '@/components/Performance/Performance.jsx'
-import View from './components/View/View.jsx'
-Dashboard
+import 'react-toastify/dist/ReactToastify.css';
+import View from '@/components/View/View.jsx'
+import { ToastContainer, toast } from 'react-toastify'
+
 
 const router = createBrowserRouter([
   {

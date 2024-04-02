@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
 import './CreateNews.scss';
 import { createNewsArticle, updateNewsArticle } from '../../utils/fetchNewsData';
+import { toast } from 'react-toastify';
 
-const FormNews = ({data, hide}) => {
+const FormNews = ({ data, hide }) => {
     const [title, setTitle] = useState(data?.title);
     const [content, setContent] = useState(data?.content);
     const [category, setCategory] = useState(data?.category);
-    
+
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
     };
@@ -23,17 +24,24 @@ const FormNews = ({data, hide}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const article = {
-            title : title,
+            title: title,
             content: content,
             category: category,
             author: 'Sachin Shah',
         }
 
-        updateNewsArticle(data.id,article);
+        updateNewsArticle(data.id, article)
+            .then(result => {
+                console.log('alert')
+                toast.success('Article updated successfully')
+            }).catch(err => {
+                toast.error('An error occured')
+            });
         hide();
     };
 
     return (
+        <>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='title'>Title:</label>
                 <input type='text' id='title' value={title} onChange={handleTitleChange} />
@@ -45,6 +53,7 @@ const FormNews = ({data, hide}) => {
                 <input type='text' id='category' value={category} onChange={handleCategoryChange} />
                 <button className='default-btn' type='submit'>Publish</button>
             </form>
+        </>
     );
 };
 

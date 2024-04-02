@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import './CreateNews.scss';
 import { createNewsArticle } from '../../utils/fetchNewsData';
 import { DeleteOutline } from '@mui/icons-material';
-
+import { ToastContainer, toast } from 'react-toastify';
 const CreateNews = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -91,8 +91,13 @@ const CreateNews = () => {
             views: 0,
             isPublished: true
         }
-        console.log(article)
-        createNewsArticle(article);
+
+        createNewsArticle(article)
+            .then(result => {
+                toast.success('Article created successfully')
+            }).catch(err => {
+                toast.error('An error occured')
+            });
     };
 
     return (
@@ -110,7 +115,7 @@ const CreateNews = () => {
                     <label htmlFor='category'>Category:</label>
                     <input type='text' id='category' value={category} onChange={handleCategoryChange} />
 
-{/* we will allow only one out of image and video */}
+                    {/* we will allow only one out of image and video */}
 
                     <label htmlFor='image'>Image:</label>
                     <input type='file' id='image' accept='image/*' onChange={handleImageUpload} ref={imageInputRef} />
@@ -165,6 +170,18 @@ const CreateNews = () => {
                     {/* )} */}
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+/>
         </div>
     );
 };
